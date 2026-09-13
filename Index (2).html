@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<meta name="theme-color" content="#7CB332">
+<title>Green Oil Hub</title>
+
+<style>
+:root{
+  --green:#7CB332;
+  --green2:#8CC63F;
+  --light:#F4F9EB;
+  --light2:#E8F3D5;
+  --dark:#1D3309;
+  --muted:#5C7343;
+  --line:#DDE8CE;
+  --white:#fff;
+  --danger:#D9534F;
+  --shadow:0 10px 30px rgba(124,179,50,.15);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:#EEF5E3;color:var(--dark);
+}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+button:disabled{opacity:.5;cursor:not-allowed}
+.app{
+  width:100%;max-width:480px;min-height:100vh;margin:auto;background:#fff;
+  position:relative;overflow-x:hidden;padding-bottom:86px;
+}
+.page{display:none;min-height:100vh;background:#fff}
+.page.active{display:block}
+
+/* Header Banner Presisi & Pas Sesuai Acuan Gambar */
+.top{
+  background:linear-gradient(135deg, #8CC63F, #7CB332);
+  color:#fff;
+  padding:24px 20px 28px;
+  border-radius:0 0 28px 28px;
+  position:relative;
+  overflow:visible;
+  min-height:175px;
+}
+.top-content {
+  width:calc(100% - 135px);
+  position:relative;
+  z-index:2;
+}
+.brand{
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:-.3px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.greeting{margin-top:18px}
+.greeting h1{font-size:24px;font-weight:800;line-height:1.2}
+.greeting p{margin-top:8px;color:rgba(255,255,255,.95);font-size:13px;line-height:1.4}
+
+/* Maskot Diperbesar & Diposisikan Presisi Menggantung Di Kanan */
+.header-mascot-wrap {
+  position:absolute;
+  right:-12px;
+  bottom:-32px;
+  width:175px;
+  height:215px;
+  z-index:3;
+  cursor:pointer;
+  transition:transform 0.2s ease;
+}
+.header-mascot-wrap:active {
+  transform:scale(0.96);
+}
+.header-mascot-img {
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  filter:drop-shadow(0 8px 12px rgba(0,0,0,0.15));
+}
+
+.content{padding:20px}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow)}
+.points{
+  margin-top:15px;background:linear-gradient(135deg, #6B9E2B, #91CB3E);color:#fff;
+  border:0;box-shadow:0 15px 30px rgba(124,179,50,.25)
+}
+.points small{opacity:.9}
+.point-number{font-size:34px;font-weight:850;margin:5px 0 12px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.section{margin:24px 0 13px}
+.section h2{font-size:18px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.service{
+  background:var(--light);border:1px solid #E1EFCB;border-radius:18px;padding:17px;
+  min-height:145px;transition:.18s
+}
+.service:active{transform:scale(.98)}
+.service .ico{font-size:31px;margin-bottom:15px}
+.service h3{font-size:16px}
+.service p{font-size:12px;color:var(--muted);line-height:1.5;margin-top:6px}
+.primary,.secondary,.danger{
+  width:100%;border-radius:13px;padding:13px 15px;font-weight:800;border:0;
+  margin-top:12px
+}
+.primary{background:var(--green);color:#fff}
+.secondary{background:#fff;color:var(--green);border:1px solid var(--green)}
+.danger{background:#fff0ef;color:var(--danger);border:1px solid #f3cdcb}
+.small-btn{border:0;border-radius:10px;padding:9px 12px;background:var(--green);color:#fff;font-weight:700}
+.back{display:flex;align-items:center;gap:10px;border:0;background:none;color:#fff;font-weight:800}
+.back span{font-size:25px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:13px;font-weight:800;margin-bottom:7px}
+.field input,.field textarea,.field select{
+  width:100%;border:1px solid #D5E5C0;border-radius:12px;padding:13px 14px;
+  outline:none;background:#fff;color:var(--dark)
+}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--green)}
+.helper{font-size:12px;color:var(--muted);line-height:1.5;margin-top:6px}
+.agent{border:1px solid var(--line);border-radius:17px;padding:15px;margin-bottom:12px}
+.agent-name{font-weight:800}
+.badge{font-size:11px;background:var(--light2);color:var(--green);padding:6px 9px;border-radius:20px;font-weight:800}
+.meta{font-size:12px;color:var(--muted);margin-top:7px}
+.summary{background:var(--light);border-radius:17px;padding:16px;margin-bottom:15px}
+.summary-item{display:flex;justify-content:space-between;gap:15px;padding:9px 0;border-bottom:1px solid #D7E7C0;font-size:13px}
+.summary-item:last-child{border-bottom:0}
+.summary-item strong{text-align:right}
+.merchant{border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:12px}
+.merchant-head{display:flex;align-items:center;gap:12px}
+.merchant-logo{
+  width:48px;height:48px;border-radius:14px;background:var(--light2);
+  display:flex;align-items:center;justify-content:center;font-size:24px
+}
+.voucher{margin-top:13px;padding:12px;border-radius:13px;background:#FAFDF5;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.voucher strong{font-size:14px}
+.voucher small{display:block;color:var(--muted);margin-top:3px}
+.qr{
+  width:225px;height:225px;margin:25px auto;background:#fff;border:10px solid #fff;
+  box-shadow:0 0 0 1px #D2E2BB;display:grid;grid-template-columns:repeat(15,1fr);
+  grid-template-rows:repeat(15,1fr);gap:1px
+}
+.qr i{background:#fff}.qr i.b{background:#111}
+.center{text-align:center}
+.success-icon{
+  width:82px;height:82px;border-radius:50%;background:var(--light2);color:var(--green);
+  display:flex;align-items:center;justify-content:center;font-size:42px;font-weight:900;margin:20px auto
+}
+
+/* Avatar Profil Diperbarui dengan Foto Profil Pilihan */
+.profile-mascot-avatar {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--light2);
+  border-radius: 50%;
+  padding: 6px;
+  border: 2px solid var(--line);
+}
+.profile-mascot-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.history{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.history:last-child{border-bottom:0}
+.history-icon{width:42px;height:42px;border-radius:12px;background:var(--light2);display:flex;align-items:center;justify-content:center;font-size:20px}
+.history h4{font-size:13px}.history p{font-size:11px;color:var(--muted);margin-top:3px}
+.history .amount{margin-left:auto;font-weight:800;font-size:12px;color:var(--green)}
+.empty{text-align:center;padding:25px 10px;color:var(--muted);font-size:13px}
+.nav{
+  position:fixed;z-index:50;bottom:0;left:50%;transform:translateX(-50%);
+  width:100%;max-width:480px;background:rgba(255,255,255,.97);
+  border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);
+  padding:9px 5px calc(9px + env(safe-area-inset-bottom))
+}
+.nav button{border:0;background:none;color:#788C64;font-size:10px;font-weight:700}
+.nav button.active{color:var(--green)}
+.nav .ni{font-size:21px;line-height:22px;margin-bottom:3px}
+.toast{
+  position:fixed;z-index:100;left:50%;bottom:92px;transform:translate(-50%,20px);
+  opacity:0;background:#1D3309;color:#fff;border-radius:12px;padding:12px 16px;
+  font-size:13px;max-width:90%;text-align:center;transition:.2s;pointer-events:none
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* Style Login Tanpa Maskot */
+.login{
+  min-height:100vh;background:linear-gradient(145deg,#7CB332,#A0D847);padding:25px 20px;
+  display:flex;align-items:center
+}
+.login-box{background:#fff;border-radius:26px;padding:32px 25px;width:100%;box-shadow:0 20px 50px rgba(0,0,0,.12)}
+.login-header{text-align:center;margin-bottom:20px}
+.login-header .icon{font-size:42px;margin-bottom:8px}
+.login-box h1{font-size:26px;color:var(--dark)}
+.login-box>p{text-align:center;color:var(--muted);font-size:13px;margin:7px 0 25px}
+.check{display:flex;gap:9px;align-items:flex-start;font-size:12px;color:var(--muted);margin:10px 0}
+.check input{margin-top:2px}
+.notice{background:#FFFDE8;border:1px solid #F3EEAE;color:#716C18;border-radius:13px;padding:12px;font-size:12px;line-height:1.5;margin-bottom:15px}
+.game-wrap{position:relative;border-radius:17px;overflow:hidden;background:#DFF0C2;touch-action:manipulation}
+#gameCanvas{display:block;width:100%;height:auto;max-height:560px}
+.game-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(29,51,9,.25)}
+.game-overlay.hidden{display:none}
+.game-panel{width:82%;background:rgba(255,255,255,.96);border-radius:20px;padding:20px;text-align:center;box-shadow:0 12px 35px rgba(0,0,0,.15)}
+.game-panel h2{margin:5px 0 7px}
+.game-panel p{font-size:13px;color:var(--muted);line-height:1.5}
+.game-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px}
+.game-stats>div{background:var(--light);border:1px solid #E1EFCB;border-radius:13px;padding:10px;text-align:center}
+.game-stats small{display:block;color:var(--muted);font-size:10px}
+.game-stats strong{display:block;font-size:18px;margin-top:3px}
+@media(min-width:481px){.app{box-shadow:0 0 50px rgba(0,0,0,.08)}}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<!-- 🔐 LOGIN -->
+<section id="loginPage" class="page active">
+  <div class="login">
+    <div class="login-box">
+      <div class="login-header">
+        <div class="icon">🌱</div>
+        <h1>Green Oil Hub</h1>
+      </div>
+      <p>Solusi pengumpulan minyak jelantah berbasis poin</p>
+
+      <div class="field">
+        <label>Nama Lengkap</label>
+        <input id="loginName" type="text" placeholder="Masukkan nama lengkap">
+      </div>
+      <div class="field">
+        <label>No. WhatsApp (Identitas Akun)</label>
+        <input id="loginPhone" type="tel" inputmode="numeric" placeholder="08xxxxxxxxxx">
+        <p class="helper">Setiap nomor WhatsApp memiliki saldo poin & riwayat tersendiri.</p>
+      </div>
+      <label class="check">
+        <input id="agree" type="checkbox">
+        <span>Saya menyetujui penggunaan aplikasi Green Oil Hub.</span>
+      </label>
+      <button class="primary" onclick="login()">Masuk ke Dashboard</button>
+    </div>
+  </div>
+</section>
+
+<!-- 🏠 DASHBOARD -->
+<section id="homePage" class="page">
+  <header class="top">
+    <div class="top-content">
+      <div class="brand">🌱 Green Oil Hub</div>
+      <div class="greeting">
+        <h1>Halo, <span id="userName">RTSEYE</span> 👋</h1>
+        <p>Kumpulkan poin & tukarkan ke E-Wallet/Bank!</p>
+      </div>
+    </div>
+    
+    <!-- Maskot Header -->
+    <div class="header-mascot-wrap" onclick="go('profile')" title="Lihat Profil">
+      <img src="HDGKY.png" alt="Maskot Green Oil Hub" class="header-mascot-img">
+    </div>
+  </header>
+
+  <main class="content">
+    <div class="card points">
+      <small>Total Saldo Poin Akun Ini</small>
+      <div class="point-number"><span id="homePoints">0</span> poin</div>
+      <button class="secondary" style="width:auto;background:#fff" onclick="go('rewards')">Tukar Voucher →</button>
+    </div>
+
+    <div class="section"><h2>Layanan Utama</h2></div>
+    <div class="grid2">
+      <div class="service" onclick="go('pickup')">
+        <div class="ico">🛵</div><h3>Penjemputan</h3>
+        <p>Setor minyak jelantah di wilayah Jawa.</p>
+      </div>
+      <div class="service" onclick="go('game')">
+        <div class="ico">🐦</div><h3>Flappy Blue</h3>
+        <p>Main game & klaim hingga 50 poin/hari.</p>
+      </div>
+    </div>
+
+    <div class="section"><h2>Menu Penukaran Saldo</h2></div>
+    <div class="grid2">
+      <div class="service" onclick="go('wallet')">
+        <div class="ico">💳</div><h3>Tukar E-Wallet</h3>
+        <p>Transfer ke DANA, OVO, GoPay, atau ShopeePay.</p>
+      </div>
+      <div class="service" onclick="go('bank')">
+        <div class="ico">🏦</div><h3>Tukar ke Bank</h3>
+        <p>Transfer ke BRI, BNI, Mandiri, BSI, atau BCA.</p>
+      </div>
+    </div>
+
+    <div class="section"><h2>Aktivitas Terbaru</h2></div>
+    <div class="card" id="homeHistory"></div>
+  </main>
+</section>
+
+<!-- 🛵 PENJEMPUTAN -->
+<section id="pickupPage" class="page">
+  <header class="top" style="min-height: auto; padding-bottom: 20px;">
+    <div class="topbar"><button class="back" onclick="go('home')"><span>‹</span> Penjemputan</button></div>
+  </header>
+  <main class="content">
+    <div class="section" style="margin-top:0"><h2>Atur Penjemputan</h2></div>
+    <div class="notice">Layanan penjemputan khusus untuk area Pulau Jawa.</div>
+
+    <div class="field">
+      <label>Pilih Kota / Kabupaten (Jawa)</label>
+      <select id="pickupCity">
+        <option value="Malang">Malang</option>
+        <option value="Surabaya">Surabaya</option>
+        <option value="Sidoarjo">Sidoarjo</option>
+        <option value="Gresik">Gresik</option>
+        <option value="Kediri">Kediri</option>
+        <option value="Semarang">Semarang</option>
+        <option value="Solo">Solo / Surakarta</option>
+        <option value="Yogyakarta">Yogyakarta</option>
+        <option value="Bandung">Bandung</option>
+        <option value="Jakarta">Jakarta</option>
+        <option value="Bogor">Bogor</option>
+        <option value="Depok">Depok</option>
+        <option value="Tangerang">Tangerang</option>
+        <option value="Bekasi">Bekasi</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Alamat Penjemputan Lengkap</label>
+      <textarea id="pickupAddress" rows="3" placeholder="Jl. Raya No. 123, Kecamatan, Kelurahan..."></textarea>
+    </div>
+
+    <div class="field">
+      <label>Jumlah Minyak Jelantah</label>
+      <select id="oilAmount">
+        <option value="5">5 Liter (+50 Poin)</option>
+        <option value="10">10 Liter (+100 Poin)</option>
+        <option value="15">15 Liter (+150 Poin)</option>
+        <option value="20">20 Liter (+200 Poin)</option>
+        <option value="30">30 Liter (+300 Poin)</option>
+      </select>
+      <p class="helper">Perhitungan: 1 Liter minyak = 10 Poin.</p>
+    </div>
+    <button class="primary" onclick="findAgents()">Cari Agen Terdekat</button>
+  </main>
+</section>
+
+<!-- 🏢 PILIH AGEN -->
+<section id="agentsPage" class="page">
+  <header class="top" style="min-height: auto; padding-bottom: 20px;">
+    <div class="topbar"><button class="back" onclick="go('pickup')"><span>‹</span> Agen Terdekat</button></div>
+  </header>
+  <main class="content">
+    <div class="section" style="margin-top:0">
+      <div class="row"><h2 id="agentCityTitle">Agen Green Oil</h2><span class="badge">Tersedia</span></div>
+    </div>
+    <div id="agentList"></div>
+  </main>
+</section>
+
+<!-- 📋 KONFIRMASI PENJEMPUTAN -->
+<section id="confirmPage" class="page">
+  <header class="top" style="min-height: auto; padding-bottom: 20px;">
+    <div class="topbar"><button class="back" onclick="go('agents')"><span>‹</span> Konfirmasi</button></div>
+  </header>
+  <main class="content">
+    <div class="section" style="margin-top:0"><h2>Detail Pesanan</h2></div>
+    <div class="summary">
+      <div class="summary-item"><span>Kota</span><strong id="cCity">-</strong></div>
+      <div class="summary-item"><span>Alamat</span><strong id="cAddress">-</strong></div>
+      <div class="summary-item"><span>Jumlah Minyak</span><strong id="cOil">-</strong></div>
+      <div class="summary-item"><span>Agen Petugas</span><strong id="cAgent">-</strong></div>
+      <div class="summary-item"><span>Poin Diperoleh</span><strong id="cPoints">-</strong></div>
+    </div>
+    <button class="primary" onclick="completePickup()">Konfirmasi Penjemputan</button>
+  </main>
+</section>
+
+<!-- ✅ SUKSES PENJEMPUTAN -->
+<section id="successPage" class="page">
+  <header class="top" style="min-height: auto; padding-bottom: 20px;">
+    <div class="brand">🌱 Green Oil Hub</div>
+  </header>
+  <main class="content center">
+    <div class="success-icon">✓</div>
+    <h2>Penjemputan Dikonfirmasi!</h2>
+    <p class="helper" style="margin-top:8px">Agen kota Anda akan segera menuju lokasi.</p>
+    <div class="card points" style="margin-top:25px;text-align:left">
+      <small>Estimasi Poin Masuk</small>
+      <div class="point-number">+<span id="earnedPoints">0</span></div>
+    </div>
+    <button class="primary" onclick="go('home')">Kembali ke Dashboard</button>
+  </main>
+</section>
+
+<!-- 🎁 VOUCHER REWARDS -->
+<section id="rewardsPage" class="page">
+  <header class="top" style="min-height: auto; padding-bottom: 20px;">
+    <div class="topbar"><button class="back" onclick="go('home')"><span>‹</span> Tukar Voucher</button></div>
+  </header>
+  <main class="content">
+    <div class="card points">
+      <small>Saldo Poin Anda</small>
+      <div class="point-number"><span id="rewardPoints">0</span></div>
+    </div>
+
+    <div class="section"><h2>Voucher Merchant Partner Jawa</h2></div>
+
+    <div class="merchant">
+      <div class="merchant-head">
+        <div class="merchant-logo">🛒</div>
+        <div><strong>Mitra Sembako Jawa</strong><p class="meta">Partner Resmi Area Jawa</p></div>
+      </div>
+      <div class="voucher">
+        <div><strong>Voucher Belanja Rp10.000</strong><small>1.000 poin</small></div>
+        <button class="small-btn" onclick="selectVoucher(1000,10000)">Tukar</button>
+      </div>
+      <div class="voucher">
+        <div><strong>Voucher Belanja Rp20.000</strong><small>2.000 poin</small></div>
+        <button class="small-btn" onclick="selectVoucher(2000,20000)">Tukar</button>
+      </div>
+    </div>
+
+    <div class="merchant">
+      <div class="merchant-head">
+        <div class="merchant-logo">🏪</div>
+        <div><strong>Toko Berkah Lokal</strong><p class="meta">Partner UMKM Jawa</p></div>
+      </div>
+      <div class="voucher">
+        <div><strong>Voucher Potongan Rp10.000</strong><small>1.000 poin</small></div>
+        <button class="small-btn" onclick="selectVoucher(1000,10000)">Tukar</button>
+      </div>
+    </div>
+  </main>
+</section>
+
+<!-- 📲 QR CODE VOUCHER -->
+<section id="qrPage" class="page">
+  <header class="top" style="min-height: auto; padding-bottom: 20px;">
+    <div class="topbar"><button class="back" onclick="go('rewards')"><span>‹</span> QR Voucher</button></div>
+  </header>
+  <main class="content">
+    <div class="center">
+      <h2>Scan Kode QR</h2>
+      <p class="helper">Tunjukkan QR ini ke merchant saat melakukan pembayaran.</p>
+    </div>
+    <div class="qr" id="qrCode"></div>
+    <div class="summary">
+      <div class="summary-item"><span>Nilai Voucher</span><strong>Rp<span id="voucherValue">0</span></strong></div>
+      <div class="summary-item"><span>Biaya Poin</span><strong><span id="voucherPoints">0</span> poin</strong></div>
+    </div>
+    <button class="primary" onclick="redeemVoucher()">Selesaikan Penukaran</button>
+  </main>
+</section>
+
+<!-- 💳 TUKAR E-WALLET -->
+<section id="walletPage" class="page">
+  <header class="top" style="min-height: auto; padding-bottom: 20px;">
+    <div class="topbar"><button class="back" onclick="go('home')"><span>‹</span> Tukar E-Wallet</button></div>
+  </header>
+  <main class="content">
+    <div class="card points">
+      <small>Saldo Poin Anda</small>
+      <div class="point-number"><span id="walletPoints">0</span></div>
+      <small style="opacity: .9;">Rate: 100 poin = Rp1.000</small>
+    </div>
+
+    <div class="section"><h2>Form Penukaran E-Wallet</h2></div>
+    
+    <div class="field">
+      <label>Pilih Provider</label>
+      <select id="walletProvider">
+        <option value="DANA">DANA</option>
+        <option value="OVO">OVO</option>
+        <option value="GoPay">GoPay</option>
+        <option value="ShopeePay">ShopeePay</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Nomor HP E-Wallet</label>
+      <input id="walletNumber" type="tel" inputmode="numeric" placeholder="Contoh: 081234567890">
+    </div>
+
+    <div class="field">
+      <label>Jumlah Poin Ditukar</label>
+      <input id="walletRedeemPoints" type="number" min="100" step="100" placeholder="Minimal 100 poin">
+      <p class="helper">Harus kelipatan 100 poin.</p>
+    </div>
+
+    <div class="summary">
+      <div class="summary-item"><span>Saldo Diterima</span><strong id="walletValue" style="color:var(--green);font-size:16px;">Rp0</strong></div>
+    </div>
+
+    <button class="primary" onclick="redeemWallet()">Tukar ke E-Wallet</button>
+  </main>
+</section>
+
+<!-- 🏦 TUKAR KE BANK -->
+<section id="bankPage" class="page">
+  <header class="top" style="min-height: auto; padding-bottom: 20px;">
+    <div class="topbar"><button class="back" onclick="go('home')"><span>‹</span> Ke Bank</button></div>
+  </header>
+  <main class="content">
+    <div class="card points">
+      <small>Saldo Poin Anda</small>
+      <div class="point-number"><span id="bankPoints">0</span></div>
+      <small style="opacity: .9;">Rate: 100 poin = Rp1.000</small>
+    </div>
+
+    <div class="section"><h2>Form Penukaran Bank</h2></div>
+    
+    <div class="field">
+      <label>Pilih Bank Tujuan</label>
+      <select id="bankProvider">
+        <option value="BRI">BRI (Bank Rakyat Indonesia)</option>
+        <option value="BNI">BNI (Bank Negara Indonesia)</option>
+        <option value="Mandiri">Bank Mandiri</option>
+        <option value="BSI">BSI (Bank Syariah Indonesia)</option>
+        <option value="BCA">BCA (Bank Central Asia)</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Nama Pemilik Rekening</label>
+      <input id="bankOwnerName" type="text" placeholder="Sesuai nama di buku tabungan">
+    </div>
+
+    <div class="field">
+      <label>Nomor Rekening</label>
+      <input id="bankNumber" type="tel" inputmode="numeric" placeholder="Masukkan nomor rekening">
+    </div>
+
+    <div class="field">
+      <label>Jumlah Poin Ditukar</label>
+      <input id="bankRedeemPoints" type="number" min="100" step="100" placeholder="Minimal 100 poin">
+      <p class="helper">Harus kelipatan 100 poin.</p>
+    </div>
+
+    <div class="summary">
+      <div class="summary-item"><span>Saldo Diterima</span><strong id="bankValue" style="color:var(--green);font-size:16px;">Rp0</strong></div>
+    </div>
+
+    <button class="primary" onclick="redeemBank()">Proses Penukaran Bank</button>
+
+    <div class="section"><h2>Riwayat Penukaran Bank</h2></div>
+    <div class="card" id="bankHistoryList"></div>
+  </main>
+</section>
+
+<!-- 🐦 GAME FLAPPY BLUE -->
+<section id="gamePage" class="page">
+  <header class="top" style="min-height: auto; padding-bottom: 20px;">
+    <div class="topbar"><button class="back" onclick="go('home')"><span>‹</span> Flappy Blue</button></div>
+  </header>
+  <main class="content">
+    <div class="card" style="padding:12px;overflow:hidden">
+      <div class="row" style="padding:5px 5px 12px">
+        <div><strong>🐦 Flappy Blue</strong><p class="meta">Lewati pipa & kumpulkan poin.</p></div>
+        <span class="badge">+5 Poin / Pipa</span>
+      </div>
+
+      <div class="game-wrap">
+        <canvas id="gameCanvas" width="440" height="560"></canvas>
+        <div class="game-overlay" id="gameOverlay">
+          <div class="game-panel">
+            <div style="font-size:42px">🐦</div>
+            <h2 id="gameTitle">Flappy Blue</h2>
+            <p id="gameMessage">Tap screen, klik, atau tekan Space untuk terbang.</p>
+            <button class="primary" onclick="startGame()">Mulai Main</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-stats">
+        <div><small>Skor</small><strong id="gameScore">0</strong></div>
+        <div><small>Skor Terbaik</small><strong id="gameBest">0</strong></div>
+        <div><small>Poin Hari Ini</small><strong><span id="gameDailyPoints">0</span>/50</strong></div>
+      </div>
+      <p class="helper" style="margin-top:10px;text-align:center;">Maksimal klaim 50 poin per hari dari game.</p>
+    </div>
+  </main>
+</section>
+
+<!-- 👤 PROFIL -->
+<section id="profilePage" class="page">
+  <header class="top" style="min-height: auto; padding-bottom: 20px;">
+    <div class="topbar"><button class="back" onclick="go('home')"><span>‹</span> Profil Saya</button></div>
+  </header>
+  <main class="content">
+    <div class="card center">
+      <!-- FOTO PROFIL KHUSUS MENGGUNAKAN HYYF.png -->
+      <div class="profile-mascot-avatar">
+        <img src="HYYF.png" alt="Foto Profil Maskot">
+      </div>
+      <h2 id="profileName">RTSEYE</h2>
+      <p class="helper" id="profilePhone">-</p>
+    </div>
+
+    <div class="section"><h2>Ringkasan Akun</h2></div>
+    <div class="card">
+      <div class="summary-item"><span>Total Saldo Poin</span><strong><span id="profilePoints">0</span></strong></div>
+      <div class="summary-item"><span>Total Riwayat</span><strong><span id="profileTransactions">0</span></strong></div>
+    </div>
+
+    <div class="section"><h2>Riwayat Seluruh Transaksi</h2></div>
+    <div class="card" id="profileHistory"></div>
+
+    <button class="danger" onclick="logout()">Keluar dari Akun</button>
+  </main>
+</section>
+
+<!-- 🧭 BOTTOM NAV -->
+<nav class="nav" id="bottomNav" style="display:none;">
+  <button id="navHome" onclick="go('home')"><div class="ni">⌂</div>Beranda</button>
+  <button id="navPickup" onclick="go('pickup')"><div class="ni">🛵</div>Jemput</button>
+  <button id="navRewards" onclick="go('rewards')"><div class="ni">🎁</div>Voucher</button>
+  <button id="navProfile" onclick="go('profile')"><div class="ni">👤</div>Profil</button>
+</nav>
+
+<div id="toast" class="toast"></div>
+
+<script>
+"use strict";
+
+const DB_KEY_USERS = "greenOilHub_Users_v6";
+const DB_KEY_SESSION = "greenOilHub_CurrentSession_v6";
+
+const cityDatabase = {
+  "Malang": [
+    { name: "Green Oil Malang - Klojen", distance: "1,2 km", rating: "4,9", hours: "08.00–17.00" },
+    { name: "Green Oil Malang - Lowokwaru", distance: "2,4 km", rating: "4,8", hours: "08.00–17.00" }
+  ],
+  "Surabaya": [
+    { name: "Green Oil Surabaya - Gubeng", distance: "1,5 km", rating: "4,9", hours: "08.00–17.00" },
+    { name: "Green Oil Surabaya - Wonokromo", distance: "2,8 km", rating: "4,8", hours: "08.00–17.00" }
+  ],
+  "Sidoarjo": [{ name: "Green Oil Sidoarjo Kota", distance: "1,8 km", rating: "4,8", hours: "08.00–17.00" }],
+  "Gresik": [{ name: "Green Oil Gresik - Kebomas", distance: "2,0 km", rating: "4,7", hours: "08.00–17.00" }],
+  "Kediri": [{ name: "Green Oil Kediri - Mojoroto", distance: "1,1 km", rating: "4,9", hours: "08.00–17.00" }],
+  "Semarang": [{ name: "Green Oil Semarang - Simpang Lima", distance: "1,0 km", rating: "4,9", hours: "08.00–17.00" }],
+  "Solo": [{ name: "Green Oil Solo - Banjarsari", distance: "1,3 km", rating: "4,9", hours: "08.00–17.00" }],
+  "Yogyakarta": [{ name: "Green Oil Jogja - Malioboro", distance: "0,8 km", rating: "4,9", hours: "08.00–17.00" }],
+  "Bandung": [{ name: "Green Oil Bandung - Dago", distance: "1,4 km", rating: "4,9", hours: "08.00–17.00" }],
+  "Jakarta": [{ name: "Green Oil Jakarta Pusat - Gambir", distance: "1,2 km", rating: "4,9", hours: "08.00–17.00" }],
+  "Bogor": [{ name: "Green Oil Bogor - Pajajaran", distance: "1,5 km", rating: "4,8", hours: "08.00–17.00" }],
+  "Depok": [{ name: "Green Oil Depok - Margonda", distance: "1,1 km", rating: "4,9", hours: "08.00–17.00" }],
+  "Tangerang": [{ name: "Green Oil Tangerang - Karawaci", distance: "2,1 km", rating: "4,8", hours: "08.00–17.00" }],
+  "Bekasi": [{ name: "Green Oil Bekasi - Barat", distance: "1,9 km", rating: "4,8", hours: "08.00–17.00" }]
+};
+
+let currentPhone = localStorage.getItem(DB_KEY_SESSION) || "";
+let data = null;
+let selectedAgent = null;
+let selectedCity = "Malang";
+let selectedVoucherPoint = 0;
+let selectedVoucherValue = 0;
+let toastTimer = null;
+
+let gameRunning = false, gameFrame = null, gameScore = 0, gamePipes = [];
+let gameBird = { x: 92, y: 270, vy: 0 }, gameLastTime = 0, gameLastPipe = 0;
+
+function getAllUsers() {
+  try {
+    const raw = localStorage.getItem(DB_KEY_USERS);
+    return raw ? JSON.parse(raw) : {};
+  } catch(e) {
+    return {};
+  }
+}
+
+function saveAllUsers(users) {
+  localStorage.setItem(DB_KEY_USERS, JSON.stringify(users));
+}
+
+function loadUserData(phone) {
+  const users = getAllUsers();
+  if (users[phone]) {
+    return users[phone];
+  } else {
+    return {
+      name: "RTSEYE",
+      phone: phone,
+      points: 0,
+      history: [],
+      game: { best: 0, dailyPoints: 0, dailyDate: "" }
+    };
+  }
+}
+
+function saveData() {
+  if (!currentPhone || !data) return;
+  const users = getAllUsers();
+  users[currentPhone] = data;
+  saveAllUsers(users);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (currentPhone) {
+    data = loadUserData(currentPhone);
+    resetGameDaily();
+    renderAll();
+    go("home");
+  } else {
+    showOnly("loginPage");
+    document.getElementById("bottomNav").style.display = "none";
+  }
+
+  const bankInput = document.getElementById("bankRedeemPoints");
+  if (bankInput) bankInput.addEventListener("input", updateBankPreview);
+
+  const walletInput = document.getElementById("walletRedeemPoints");
+  if (walletInput) walletInput.addEventListener("input", updateWalletPreview);
+});
+
+function showOnly(id) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  const el = document.getElementById(id);
+  if (el) el.classList.add("active");
+  window.scrollTo({ top: 0, behavior: "instant" });
+}
+
+function go(name) {
+  if (!currentPhone && name !== "loginPage") {
+    showOnly("loginPage");
+    return;
+  }
+  const targetId = name + "Page";
+  showOnly(targetId);
+  updateNav(name);
+  renderAll();
+  if (name === "game") setTimeout(initGameCanvas, 0);
+}
+
+function updateNav(name) {
+  document.querySelectorAll(".nav button").forEach(b => b.classList.remove("active"));
+  const ids = { home: "navHome", pickup: "navPickup", rewards: "navRewards", profile: "navProfile" };
+  if (ids[name]) document.getElementById(ids[name]).classList.add("active");
+  document.getElementById("bottomNav").style.display =
+    ["home", "pickup", "rewards", "profile"].includes(name) ? "grid" : "none";
+}
+
+function login() {
+  const name = document.getElementById("loginName").value.trim() || "RTSEYE";
+  const phone = document.getElementById("loginPhone").value.trim();
+  const agree = document.getElementById("agree").checked;
+
+  if (phone.length < 8) return toast("Nomor WhatsApp tidak valid.");
+  if (!agree) return toast("Centang persetujuan terlebih dahulu.");
+
+  currentPhone = phone;
+  localStorage.setItem(DB_KEY_SESSION, currentPhone);
+  
+  data = loadUserData(currentPhone);
+  data.name = name; 
+  saveData();
+
+  resetGameDaily();
+  renderAll();
+  go("home");
+  toast("Selamat datang kembali, " + name + "!");
+}
+
+function logout() {
+  if (!confirm("Keluar dari akun Anda?")) return;
+  currentPhone = "";
+  data = null;
+  localStorage.removeItem(DB_KEY_SESSION);
+  document.getElementById("bottomNav").style.display = "none";
+  showOnly("loginPage");
+  toast("Berhasil keluar akun.");
+}
+
+function findAgents() {
+  const city = document.getElementById("pickupCity").value;
+  const address = document.getElementById("pickupAddress").value.trim();
+  const amount = Number(document.getElementById("oilAmount").value);
+
+  if (address.length < 5) return toast("Masukkan alamat penjemputan lengkap.");
+  if (!amount) return toast("Pilih jumlah minyak.");
+
+  selectedCity = city;
+  const agents = cityDatabase[city] || [
+    { name: `Green Oil - Area ${city}`, distance: "2,0 km", rating: "4,8", hours: "08.00–17.00" }
+  ];
+
+  document.getElementById("agentCityTitle").textContent = `Agen Area ${city}`;
+  document.getElementById("agentList").innerHTML = agents.map((a) => `
+    <div class="agent">
+      <div class="row">
+        <div class="agent-name">${escapeHtml(a.name)}</div>
+        <span class="badge">${escapeHtml(a.distance)}</span>
+      </div>
+      <div class="meta">⭐ ${escapeHtml(a.rating)} · ${escapeHtml(a.hours)}</div>
+      <button class="primary" onclick="chooseAgent('${escapeHtml(a.name)}')">Pilih Agen Ini</button>
+    </div>
+  `).join("");
+
+  go("agents");
+}
+
+function chooseAgent(agentName) {
+  selectedAgent = agentName;
+  const amount = Number(document.getElementById("oilAmount").value);
+  const address = document.getElementById("pickupAddress").value.trim();
+  const earned = amount * 10;
+
+  document.getElementById("cCity").textContent = selectedCity;
+  document.getElementById("cAddress").textContent = address;
+  document.getElementById("cOil").textContent = amount + " Liter";
+  document.getElementById("cAgent").textContent = selectedAgent;
+  document.getElementById("cPoints").textContent = "+" + earned + " Poin";
+
+  go("confirm");
+}
+
+function completePickup() {
+  if (!selectedAgent) return go("agents");
+
+  const amount = Number(document.getElementById("oilAmount").value);
+  const earned = amount * 10;
+
+  data.points += earned;
+  data.history.unshift({
+    type: "pickup",
+    title: `Setor Minyak (${amount}L) - ${selectedCity}`,
+    detail: selectedAgent,
+    points: "+" + earned + " Poin",
+    date: new Date().toLocaleString("id-ID")
+  });
+
+  saveData();
+  document.getElementById("earnedPoints").textContent = earned.toLocaleString("id-ID");
+  go("success");
+
+  document.getElementById("pickupAddress").value = "";
+  selectedAgent = null;
+}
+
+function updateWalletPreview() {
+  const pts = Number(document.getElementById("walletRedeemPoints").value) || 0;
+  const val = pts * 10;
+  document.getElementById("walletValue").textContent = "Rp" + val.toLocaleString("id-ID");
+}
+
+function redeemWallet() {
+  const provider = document.getElementById("walletProvider").value;
+  const number = document.getElementById("walletNumber").value.trim();
+  const points = Number(document.getElementById("walletRedeemPoints").value);
+
+  if (number.length < 8) return toast("Masukkan nomor HP E-Wallet yang valid.");
+  if (!Number.isFinite(points) || points < 100 || points % 100 !== 0) {
+    return toast("Poin minimal 100 & kelipatan 100.");
+  }
+  if (points > data.points) return toast("Saldo poin kamu tidak mencukupi.");
+
+  const rupiah = points * 10;
+  data.points -= points;
+
+  data.history.unshift({
+    type: "wallet",
+    title: "Tukar ke E-Wallet " + provider,
+    detail: "No. " + maskAccount(number),
+    points: "-" + points.toLocaleString("id-ID") + " Poin",
+    date: new Date().toLocaleString("id-ID")
+  });
+
+  saveData();
+  renderAll();
+
+  document.getElementById("walletNumber").value = "";
+  document.getElementById("walletRedeemPoints").value = "";
+  updateWalletPreview();
+
+  toast("Penukaran Rp" + rupiah.toLocaleString("id-ID") + " ke " + provider + " berhasil!");
+}
+
+function updateBankPreview() {
+  const pts = Number(document.getElementById("bankRedeemPoints").value) || 0;
+  const val = pts * 10;
+  document.getElementById("bankValue").textContent = "Rp" + val.toLocaleString("id-ID");
+}
+
+function redeemBank() {
+  const provider = document.getElementById("bankProvider").value;
+  const ownerName = document.getElementById("bankOwnerName").value.trim();
+  const number = document.getElementById("bankNumber").value.trim();
+  const points = Number(document.getElementById("bankRedeemPoints").value);
+
+  if (ownerName.length < 3) return toast("Masukkan nama pemilik rekening.");
+  if (number.length < 6) return toast("Nomor rekening tidak valid.");
+  if (!Number.isFinite(points) || points < 100 || points % 100 !== 0) {
+    return toast("Poin minimal 100 & kelipatan 100.");
+  }
+  if (points > data.points) return toast("Saldo poin kamu tidak mencukupi.");
+
+  const rupiah = points * 10;
+  data.points -= points;
+
+  data.history.unshift({
+    type: "bank",
+    title: "Tukar ke Bank " + provider,
+    detail: ownerName + " (" + maskAccount(number) + ")",
+    points: "-" + points.toLocaleString("id-ID") + " Poin",
+    date: new Date().toLocaleString("id-ID")
+  });
+
+  saveData();
+  renderAll();
+
+  document.getElementById("bankOwnerName").value = "";
+  document.getElementById("bankNumber").value = "";
+  document.getElementById("bankRedeemPoints").value = "";
+  updateBankPreview();
+
+  toast("Penukaran Rp" + rupiah.toLocaleString("id-ID") + " ke " + provider + " berhasil!");
+}
+
+function maskAccount(val) {
+  const s = String(val);
+  return s.length <= 4 ? "••••" : "••••" + s.slice(-4);
+}
+
+function selectVoucher(point, value) {
+  if (data.points < point) return toast("Poin kamu belum mencukupi.");
+
+  selectedVoucherPoint = point;
+  selectedVoucherValue = value;
+
+  document.getElementById("voucherValue").textContent = value.toLocaleString("id-ID");
+  document.getElementById("voucherPoints").textContent = point.toLocaleString("id-ID");
+
+  buildQR();
+  go("qr");
+}
+
+function redeemVoucher() {
+  if (data.points < selectedVoucherPoint) {
+    toast("Poin kamu tidak mencukupi.");
+    return go("rewards");
+  }
+
+  data.points -= selectedVoucherPoint;
+  data.history.unshift({
+    type: "reward",
+    title: "Tukar Voucher Belanja",
+    detail: "Voucher Rp" + selectedVoucherValue.toLocaleString("id-ID"),
+    points: "-" + selectedVoucherPoint.toLocaleString("id-ID") + " Poin",
+    date: new Date().toLocaleString("id-ID")
+  });
+
+  saveData();
+  renderAll();
+  toast("Voucher berhasil ditukarkan!");
+  go("home");
+}
+
+function buildQR() {
+  const qr = document.getElementById("qrCode");
+  qr.innerHTML = "";
+  const seed = (selectedVoucherPoint + selectedVoucherValue + data.points) % 9999;
+
+  for (let i = 0; i < 225; i++) {
+    const cell = document.createElement("i");
+    let black = ((i * 37 + seed * 13 + i * i) % 11) < 5;
+    const r = Math.floor(i / 15), c = i % 15;
+    if ((r < 5 && c < 5) || (r < 5 && c > 9) || (r > 9 && c < 5)) {
+      const rr = r < 5 ? r : r - 10, cc = c < 5 ? c : c - 10;
+      black = (rr === 0 || rr === 4 || cc === 0 || cc === 4 || (rr >= 1 && rr <= 3 && cc >= 1 && cc <= 3));
+    }
+    if (black) cell.className = "b";
+    qr.appendChild(cell);
+  }
+}
+
+function todayKey() {
+  const d = new Date();
+  return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+}
+
+function resetGameDaily() {
+  if (!data) return;
+  if (!data.game) data.game = { best: 0, dailyPoints: 0, dailyDate: "" };
+  if (data.game.dailyDate !== todayKey()) {
+    data.game.dailyDate = todayKey();
+    data.game.dailyPoints = 0;
+    saveData();
+  }
+}
+
+function renderGameStats() {
+  if (!data) return;
+  resetGameDaily();
+  document.getElementById("gameScore").textContent = gameScore.toLocaleString("id-ID");
+  document.getElementById("gameBest").textContent = (data.game.best || 0).toLocaleString("id-ID");
+  document.getElementById("gameDailyPoints").textContent = (data.game.dailyPoints || 0).toLocaleString("id-ID");
+}
+
+function initGameCanvas() {
+  const c = document.getElementById("gameCanvas");
+  if (c) drawGame(c.getContext("2d"));
+}
+
+function startGame() {
+  resetGameDaily();
+  const c = document.getElementById("gameCanvas");
+  if (!c) return;
+
+  gameRunning = true;
+  gameScore = 0;
+  gamePipes = [];
+  gameBird = { x: 92, y: 270, vy: 0 };
+  gameLastTime = performance.now();
+  gameLastPipe = 0;
+
+  document.getElementById("gameOverlay").classList.add("hidden");
+  cancelAnimationFrame(gameFrame);
+  gameFrame = requestAnimationFrame(gameLoop);
+  flap();
+}
+
+function flap() {
+  if (gameRunning) gameBird.vy = -380;
+}
+
+function gameLoop(t) {
+  if (!gameRunning) return;
+  const dt = Math.min((t - gameLastTime) / 1000, 0.032);
+  gameLastTime = t;
+
+  updateGame(dt, t);
+  drawGame(document.getElementById("gameCanvas").getContext("2d"));
+  gameFrame = requestAnimationFrame(gameLoop);
+}
+
+function updateGame(dt, t) {
+  const c = document.getElementById("gameCanvas");
+  gameBird.vy += 1000 * dt;
+  gameBird.y += gameBird.vy * dt;
+
+  if (t - gameLastPipe > 1600) {
+    const gap = 150, minTop = 60, maxTop = c.height - gap - 100;
+    const top = minTop + Math.random() * (maxTop - minTop);
+    gamePipes.push({ x: c.width + 20, top, gap, passed: false });
+    gameLastPipe = t;
+  }
+
+  gamePipes.forEach(p => p.x -= 180 * dt);
+  gamePipes = gamePipes.filter(p => p.x > -70);
+
+  for (const p of gamePipes) {
+    if (!p.passed && p.x + 58 < gameBird.x) {
+      p.passed = true;
+      gameScore++;
+      addGamePoints(5);
+    }
+  }
+
+  const bx = gameBird.x, by = gameBird.y, br = 18;
+  if (by - br < 0 || by + br > c.height - 34 || gamePipes.some(p => bx + br > p.x && bx - br < p.x + 58 && (by - br < p.top || by + br > p.top + p.gap))) {
+    endGame();
+  }
+}
+
+function addGamePoints(amount) {
+  resetGameDaily();
+  const remainingDaily = Math.max(0, 50 - (data.game.dailyPoints || 0));
+  const credited = Math.min(amount, remainingDaily);
+
+  if (credited > 0) {
+    data.points += credited;
+    data.game.dailyPoints += credited;
+    saveData();
+    renderAll();
+  }
+
+  if (gameScore > (data.game.best || 0)) {
+    data.game.best = gameScore;
+    saveData();
+  }
+  renderGameStats();
+}
+
+function endGame() {
+  if (!gameRunning) return;
+  gameRunning = false;
+  cancelAnimationFrame(gameFrame);
+
+  if (gameScore > (data.game.best || 0)) {
+    data.game.best = gameScore;
+    saveData();
+  }
+
+  document.getElementById("gameTitle").textContent = "Game Over!";
+  document.getElementById("gameMessage").innerHTML = `Skor kamu: <strong>${gameScore}</strong><br>Poin game hari ini: <strong>${data.game.dailyPoints}/50</strong>`;
+  document.getElementById("gameOverlay").classList.remove("hidden");
+  
+  const b = document.querySelector("#gameOverlay .primary");
+  if (b) b.textContent = "Coba Lagi";
+  renderAll();
+}
+
+function drawGame(ctx) {
+  const c = ctx.canvas;
+  ctx.clearRect(0, 0, c.width, c.height);
+
+  const g = ctx.createLinearGradient(0, 0, 0, c.height);
+  g.addColorStop(0, "#EEF8DB");
+  g.addColorStop(1, "#C7E898");
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, c.width, c.height);
+
+  ctx.fillStyle = "#8CC63F";
+  ctx.fillRect(0, c.height - 34, c.width, 34);
+  ctx.fillStyle = "#6B9E2B";
+  ctx.fillRect(0, c.height - 34, c.width, 5);
+
+  gamePipes.forEach(p => {
+    ctx.fillStyle = "#8CC63F";
+    ctx.fillRect(p.x, 0, 58, p.top);
+    ctx.fillRect(p.x, p.top + p.gap, 58, c.height - (p.top + p.gap) - 34);
+
+    ctx.fillStyle = "#7CB332";
+    ctx.fillRect(p.x - 5, p.top - 14, 68, 14);
+    ctx.fillRect(p.x - 5, p.top + p.gap, 68, 14);
+  });
+
+  ctx.save();
+  ctx.translate(gameBird.x, gameBird.y);
+  
+  const rotation = Math.max(-0.35, Math.min(0.45, gameBird.vy / 500));
+  ctx.rotate(rotation);
+
+  ctx.fillStyle = "#FF9800";
+  ctx.beginPath();
+  ctx.arc(-4, 17, 3, 0, Math.PI * 2);
+  ctx.arc(4, 17, 3, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "#2979FF";
+  ctx.beginPath();
+  ctx.ellipse(-17, 4, 8, 4, -Math.PI / 6, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "#42A5F5";
+  ctx.beginPath();
+  ctx.arc(0, 0, 18, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.arc(-2, -19, 4, 0, Math.PI * 2);
+  ctx.arc(3, -20, 3, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "#FFF176";
+  ctx.beginPath();
+  ctx.arc(5, 6, 11, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "#1E88E5";
+  ctx.beginPath();
+  ctx.ellipse(-6, 3, 9, 6, Math.PI / 8, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "#000000";
+  ctx.beginPath();
+  ctx.arc(8, -4, 3.5, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "#FFFFFF";
+  ctx.beginPath();
+  ctx.arc(9, -5, 1.2, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "rgba(255, 138, 128, 0.5)";
+  ctx.beginPath();
+  ctx.arc(5, 2, 3, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "#FFC107";
+  ctx.beginPath();
+  ctx.moveTo(14, -2);
+  ctx.lineTo(22, 1);
+  ctx.lineTo(14, 5);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.restore();
+
+  ctx.fillStyle = "#1D3309";
+  ctx.font = "800 24px system-ui";
+  ctx.textAlign = "center";
+  ctx.fillText(gameScore, c.width / 2, 40);
+}
+
+document.addEventListener("keydown", e => {
+  if (e.code === "Space" && document.getElementById("gamePage")?.classList.contains("active")) {
+    e.preventDefault();
+    gameRunning ? flap() : startGame();
+  }
+});
+
+document.addEventListener("pointerdown", e => {
+  const c = document.getElementById("gameCanvas");
+  if (c && e.target === c && document.getElementById("gamePage").classList.contains("active")) {
+    gameRunning ? flap() : startGame();
+  }
+});
+
+function renderAll() {
+  if (!data) return;
+
+  const formatted = data.points.toLocaleString("id-ID");
+
+  document.getElementById("userName").textContent = data.name || "RTSEYE";
+  document.getElementById("homePoints").textContent = formatted;
+  document.getElementById("rewardPoints").textContent = formatted;
+  document.getElementById("walletPoints").textContent = formatted;
+  document.getElementById("bankPoints").textContent = formatted;
+  document.getElementById("profilePoints").textContent = formatted;
+
+  document.getElementById("profileName").textContent = data.name || "RTSEYE";
+  document.getElementById("profilePhone").textContent = data.phone || "-";
+  document.getElementById("profileTransactions").textContent = data.history.length;
+
+  renderGameStats();
+  renderHistory();
+}
+
+function renderHistory() {
+  if (!data) return;
+  const home = document.getElementById("homeHistory");
+  const profile = document.getElementById("profileHistory");
+  const bankHist = document.getElementById("bankHistoryList");
+
+  if (!data.history.length) {
+    const empty = `<div class="empty">Belum ada transaksi.</div>`;
+    if (home) home.innerHTML = empty;
+    if (profile) profile.innerHTML = empty;
+    if (bankHist) bankHist.innerHTML = empty;
+    return;
+  }
+
+  const makeItem = h => `
+    <div class="history">
+      <div class="history-icon">${h.type === "pickup" ? "♻️" : h.type === "reward" ? "🎁" : h.type === "wallet" ? "💳" : h.type === "bank" ? "🏦" : "🎮"}</div>
+      <div>
+        <h4>${escapeHtml(h.title)}</h4>
+        <p>${escapeHtml(h.detail)} · ${escapeHtml(h.date)}</p>
+      </div>
+      <div class="amount">${escapeHtml(h.points)}</div>
+    </div>
+  `;
+
+  if (home) home.innerHTML = data.history.slice(0, 5).map(makeItem).join("");
+  if (profile) profile.innerHTML = data.history.map(makeItem).join("");
+
+  const bankOnly = data.history.filter(h => h.type === "bank");
+  if (bankHist) {
+    bankHist.innerHTML = bankOnly.length ? bankOnly.map(makeItem).join("") : `<div class="empty">Belum ada transaksi bank.</div>`;
+  }
+}
+
+function toast(msg) {
+  const el = document.getElementById("toast");
+  el.textContent = msg;
+  el.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove("show"), 2600);
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+</script>
+</div>
+</body>
+</html>
